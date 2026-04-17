@@ -1,42 +1,59 @@
+const gachaMessage = document.getElementById('gachaMessage');
 const handle = document.getElementById('handle');
 
-let isPointerDown = false;
-let lastAngle = 0;
-let currentRotation = 0;
+if (handle) {
+  let isPointerDown = false;
+  let lastAngle = 0;
+  let currentRotation = 0;
+  let lastSpinTime = 0;
 
-const getAngle = (event) => {
-  const rect = handle.getBoundingClientRect();
-  const centerX = rect.left + rect.width / 2;
-  const centerY = rect.top + rect.height / 2;
-  const x = event.clientX - centerX;
-  const y = event.clientY - centerY;
-  return Math.atan2(y, x);
-};
+  const getAngle = (event) => {
+    const rect = handle.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const x = event.clientX - centerX;
+    const y = event.clientY - centerY;
+    return Math.atan2(y, x);
+  };
 
-handle.addEventListener('pointerdown', (event) => {
-  event.preventDefault();
-  isPointerDown = true;
-  handle.setPointerCapture(event.pointerId);
-  lastAngle = getAngle(event);
-});
+  const finishSpin = () => {
+    const now = Date.now();
+    if (now - lastSpinTime < 500) return;
+    lastSpinTime = now;
+    if (gachaMessage) {
+      gachaMessage.textContent = 'ガチャを回しました！結果を確認しましょう。';
+    }
+  };
 
-handle.addEventListener('pointermove', (event) => {
-  if (!isPointerDown) return;
-  const angle = getAngle(event);
-  let delta = angle - lastAngle;
+  handle.addEventListener('pointerdown', (event) => {
+    event.preventDefault();
+    isPointerDown = true;
+    handle.setPointerCapture(event.pointerId);
+    lastAngle = getAngle(event);
+  });
 
-  if (delta > Math.PI) delta -= 2 * Math.PI;
-  if (delta < -Math.PI) delta += 2 * Math.PI;
+  handle.addEventListener('pointermove', (event) => {
+    if (!isPointerDown) return;
+    const angle = getAngle(event);
+    let delta = angle - lastAngle;
 
-  currentRotation += delta;
-  lastAngle = angle;
-  handle.style.transform = `rotate(${currentRotation}rad)`;
-});
+    if (delta > Math.PI) delta -= 2 * Math.PI;
+    if (delta < -Math.PI) delta += 2 * Math.PI;
 
-handle.addEventListener('pointerup', () => {
-  isPointerDown = false;
-});
+    currentRotation += delta;
+    lastAngle = angle;
+    handle.style.transform = `rotate(${currentRotation}rad)`;
+  });
 
-handle.addEventListener('pointercancel', () => {
-  isPointerDown = false;
-});
+  handle.addEventListener('pointerup', () => {
+    if (isPointerDown) {
+      finishSpin();
+    }
+    isPointerDown = false;
+  });
+
+  handle.addEventListener('pointercancel', () => {
+    isPointerDown = false;
+  });
+}
+

@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
     <link rel="stylesheet" href="style.css">
   </head>
+  <body>
+    <main>
+      <section class="login-page">
+        <div class="login-box">
+          <h1>ログイン</h1>
+          <p>ログインするとガチャを回せます。</p>
+          <label>
+            ユーザー名
+            <input id="username" type="text" placeholder="ユーザー名を入力">
+          </label>
+          <label>
+            パスワード
+            <input id="password" type="password" placeholder="パスワードを入力">
+          </label>
+          <div class="login-actions">
+            <button id="loginButton" type="button">ログイン</button>
+          </div>
+          <div class="login-error" id="loginError"></div>
+        </div>
+      </section>
+    </main>
 
-  <div class="gacha">
-  <img src="photo/gacha.png" alt="ガチャ画像">
-
-  <div class="handle" id="handle">
-    <div class="handle-inner"></div>
-  </div>
-</div>
-
-  <script src="script.js"></script>
+    <script src="login.js"></script>
+  </body>
 </html>
