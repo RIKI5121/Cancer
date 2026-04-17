@@ -1,4 +1,4 @@
-const loginButton = document.getElementById('loginButton');
+const loginForm = document.getElementById('loginForm');
 const loginError = document.getElementById('loginError');
 
 const validateLogin = () => {
@@ -14,7 +14,9 @@ const validateLogin = () => {
   return true;
 };
 
-loginButton.addEventListener('click', () => {
+loginForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
   if (validateLogin()) {
     window.location.href = 'gacha.html';
   }

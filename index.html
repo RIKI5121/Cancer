@@ -6,24 +6,27 @@
     <title>ログイン</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body class="auth-page">
     <main>
       <section class="login-page">
         <div class="login-box">
           <h1>ログイン</h1>
-          <p>ログインするとガチャを回せます。</p>
-          <label>
-            ユーザー名
-            <input id="username" type="text" placeholder="ユーザー名を入力">
-          </label>
-          <label>
-            パスワード
-            <input id="password" type="password" placeholder="パスワードを入力">
-          </label>
-          <div class="login-actions">
-            <button id="loginButton" type="button">ログイン</button>
-          </div>
-          <div class="login-error" id="loginError"></div>
+          
+
+          <form class="login-form" id="loginForm" novalidate>
+            <label>
+              <span>ユーザー名</span>
+              <input id="username" type="text" placeholder="ユーザー名を入力" autocomplete="username">
+            </label>
+            <label>
+              <span>パスワード</span>
+              <input id="password" type="password" placeholder="パスワードを入力" autocomplete="current-password">
+            </label>
+            <div class="login-actions">
+              <button id="loginButton" type="submit">ログイン</button>
+            </div>
+            <div class="login-error" id="loginError"></div>
+          </form>
         </div>
       </section>
     </main>
