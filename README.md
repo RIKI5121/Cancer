@@ -26,10 +26,16 @@
 
 ## 4. 実装ファイル
 
+- `index.php`: ログイン / 新規登録画面
+- `gacha.php`: 認証済みガチャ画面
+- `assets/css/style.css`: 共通スタイル
+- `assets/js/login.js`: ログイン / 登録画面のクライアント処理
+- `assets/js/script.js`: ガチャ画面のクライアント処理
 - `api/db.php`: PDO接続とJSONレスポンス共通処理
 - `api/register.php`: ユーザー登録API
 - `api/login.php`: ログインAPI
-- `login.js`: フロントの登録/ログインAPI呼び出し
+- `api/logout.php`: ログアウトAPI
+- `api/me.php`: ログイン状態確認API
 
 ## 5. DB接続設定を変える場合
 

@@ -1,5 +1,9 @@
 const gachaMessage = document.getElementById('gachaMessage');
 const handle = document.getElementById('handle');
+const logoutButton = document.getElementById('logoutButton');
+const userGreeting = document.getElementById('userGreeting');
+
+let currentUsername = '';
 
 const ensureAuthenticated = async () => {
   try {
@@ -8,22 +12,48 @@ const ensureAuthenticated = async () => {
       credentials: 'same-origin',
     });
     if (!response.ok) {
-      window.location.href = 'index.html';
+      window.location.href = 'index.php';
       return false;
     }
 
     const data = await response.json();
     if (!data.success) {
-      window.location.href = 'index.html';
+      window.location.href = 'index.php';
       return false;
+    }
+
+    currentUsername = data.user.username ?? '';
+    if (userGreeting) {
+      userGreeting.textContent = `ようこそ、${currentUsername} さん`;
     }
 
     return true;
   } catch (error) {
-    window.location.href = 'index.html';
+    window.location.href = 'index.php';
     return false;
   }
 };
+
+const performLogout = async () => {
+  try {
+    await fetch('api/logout.php', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    });
+  } catch (error) {
+    // ignore errors and redirect anyway
+  } finally {
+    window.location.href = 'index.php';
+  }
+};
+
+if (logoutButton) {
+  logoutButton.addEventListener('click', performLogout);
+}
 
 const initGacha = async () => {
   const isAuthenticated = await ensureAuthenticated();

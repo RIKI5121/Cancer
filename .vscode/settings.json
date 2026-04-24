@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^powershell -NoProfile -Command \"\\$dirs = @\\('assets','assets/css','assets/js','includes'\\); foreach \\(\\$d in \\$dirs\\) \\{ if \\(-not \\(Test-Path \\$d\\)\\) \\{ New-Item -ItemType Directory -Path \\$d \\| Out-Null \\} \\}; if \\(Test-Path 'style\\.css'\\) \\{ Move-Item -Force 'style\\.css' 'assets/css/style\\.css' \\}; if \\(Test-Path 'login\\.js'\\) \\{ Move-Item -Force 'login\\.js' 'assets/js/login\\.js' \\}; if \\(Test-Path 'script\\.js'\\) \\{ Move-Item -Force 'script\\.js' 'assets/js/script\\.js' \\}\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^powershell -NoProfile -Command \"if\\(-not\\(Test-Path assets\\)\\)\\{New-Item -ItemType Directory assets \\| Out-Null\\}; if\\(-not\\(Test-Path assets/css\\)\\)\\{New-Item -ItemType Directory assets/css \\| Out-Null\\}; if\\(-not\\(Test-Path assets/js\\)\\)\\{New-Item -ItemType Directory assets/js \\| Out-Null\\}; if\\(-not\\(Test-Path includes\\)\\)\\{New-Item -ItemType Directory includes \\| Out-Null\\}; if\\(Test-Path style\\.css\\)\\{Move-Item -Force style\\.css assets/css/style\\.css\\}; if\\(Test-Path login\\.js\\)\\{Move-Item -Force login\\.js assets/js/login\\.js\\}; if\\(Test-Path script\\.js\\)\\{Move-Item -Force script\\.js assets/js/script\\.js\\}\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
